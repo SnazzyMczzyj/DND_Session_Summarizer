@@ -10,7 +10,7 @@ from chunk_split import chunk_calc
 text_chunks = []
 summary_list = []
 prompt = ''
-
+ 
 base_url = 'https://api.assemblyai.com/v2'
 headers = {'authorization' : API_KEY_ASSEMBLYAI}
 
@@ -81,4 +81,5 @@ for i in text_chunks:
 
 
 
-### Automatically upload them to shared Google drive? ###
+## Automatically upload them to shared Google drive? ## 
+## 

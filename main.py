@@ -82,4 +82,3 @@ for i in text_chunks:
 
 
 ## Automatically upload them to shared Google drive? ## 
-## 

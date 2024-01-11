@@ -3,25 +3,11 @@ import tiktoken
 import re
 import os
 
-text_chunks = []
 
+def chunk_calc(prompt):
 
-'''
-# Test Prompt
-
-current_directory = os.path.dirname(os.path.abspath(__file__))
-folder_path = os.path.join(current_directory, 'Test_Files')
-file_path = os.path.join(folder_path, 'test_text.txt')
-with open(file_path, 'r', encoding='UTF-8') as file:
-    prompt = file.read()
-print(prompt)
-'''
-
-prompt = ''
-
-def chunk_calc(prompt, text_chunks):
-
-    prompt = prompt.replace('\n', ' ')      # New lines don't work with the REGEX pattern.  
+    prompt = prompt.replace('\n', ' ')      # New lines don't work with the REGEX pattern. 
+    text_chunks = [] 
     
     remaining_text = None
     max_tokens = 3000       # gpt-3.5-turbo allows 4097 tokens to be shared between the prompt and the response. Max tokens can be adjusted if there needs to be more/less room for a larger/smaller response.
@@ -55,7 +41,17 @@ def chunk_calc(prompt, text_chunks):
 
             return text_chunks
 
-            
-#chunk_calc(prompt,text_chunks)
-#print('Number Of Chunks:', len(text_chunks))
-#print('Chunk List:', text_chunks)
+# If text_chunks is larger than 10 elements, split and add to list_chunk
+def chunk_list_split(summary_list):
+    
+    list_chunk = []
+    max_elements = 10
+
+    while len(summary_list) > max_elements:
+      list_chunk.append(summary_list[:max_elements])
+      summary_list = summary_list[max_elements:]
+
+    if len(summary_list) > 0:
+        list_chunk.append(summary_list)
+
+    return list_chunk
